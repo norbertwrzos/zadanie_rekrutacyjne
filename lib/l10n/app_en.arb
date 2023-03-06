@@ -1,0 +1,6 @@
+{
+  "searchOutlier": "Search for the outlier!",
+  "inputNums": "Enter decimal numbers, using coma as a separator",
+  "outlierValue": "The outlier value is:",
+  "title": "FindOutlierApp"
+}

@@ -1,3 +1,5 @@
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:zadanie/result.dart';
 
@@ -10,7 +12,20 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: MyHomePage());
+    return MaterialApp(
+        onGenerateTitle: (context) => AppLocalizations.of(context).title,
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate
+        ],
+        supportedLocales: const [
+          Locale('en'), // English
+          Locale('es'), // Spanish
+          Locale('pl'), // Polish
+        ],
+        home: const MyHomePage());
   }
 }
 
@@ -53,7 +68,6 @@ int findOutlier(List<int> numbers) {
     return even!;
   }
 
- 
   return 0;
 }
 
@@ -65,41 +79,52 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            SizedBox(
+                height: 200,
+                child: Text(AppLocalizations.of(context).title,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(fontSize: 50, color: Colors.blue))),
             Container(
               padding: const EdgeInsets.all(30),
               child: TextField(
                 controller: _controller,
                 keyboardType:
                     const TextInputType.numberWithOptions(decimal: true),
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16.0)),
                   label: Text(
-                    "Wprowadź liczby po przecinku",
-                    style: TextStyle(fontSize: 18),
+                    AppLocalizations.of(context).inputNums,
+                    style: const TextStyle(
+                      fontSize: 18,
+                    ),
+                    softWrap: true,
                   ),
                 ),
               ),
             ),
-            SizedBox(
-              width: 120,
-              height: 50,
-              child: ElevatedButton(
-                  onPressed: () {
-                    final List<int> numbers =
-                        _controller.text.split(',').map(int.parse).toList();
-                    final int outlier = findOutlier(numbers);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Result(outlier: outlier),
-                      ),
-                    );
-                  },
-                  child: const Text(
-                    "Wyszukaj",
-                    style: TextStyle(fontSize: 18),
-                  )),
-            )
+            ElevatedButton(
+              style: ButtonStyle(
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16.0)))),
+              onPressed: () {
+                final List<int> numbers =
+                    _controller.text.split(',').map(int.parse).toList();
+                final int outlier = findOutlier(numbers);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Result(outlier: outlier),
+                  ),
+                );
+              },
+              child: Text(
+                AppLocalizations.of(context).searchOutlier,
+                style: const TextStyle(fontSize: 18),
+                textAlign: TextAlign.center,
+              ),
+            ),
           ],
         ),
       ),

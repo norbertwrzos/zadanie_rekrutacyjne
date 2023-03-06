@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class Result extends StatelessWidget {
@@ -12,10 +13,10 @@ class Result extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
+            Text(
+              AppLocalizations.of(context).outlierValue,
               textAlign: TextAlign.center,
-              'Wartość odstająca: \n \n',
-              style: TextStyle(fontSize: 50),
+              style: const TextStyle(fontSize: 50),
             ),
             Text(
               textAlign: TextAlign.center,

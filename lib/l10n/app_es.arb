@@ -1,0 +1,6 @@
+{
+  "searchOutlier": "¡Buscar el valor atípico!",
+  "inputNums": "Ingrese números decimales, usando la coma como separador",
+  "outlierValue": "El valor atípico es:",
+  "title": "Aplicación FindOutlier"
+}
